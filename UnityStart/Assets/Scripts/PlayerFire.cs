@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class PlayerFire : MonoBehaviour
 {
+    public GameObject bulletFactory;
+    public GameObject firePosition;
+    public int poosSize = 10;
+    GameObject[] bulletObjectPool;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        bulletObjectPool = new GameObject[poosSize];
+
+        for (int i = 0; i < poosSize; i++)
+        {
+            GameObject bullet = GameObject.Instantiate(bulletFactory);
+            bulletObjectPool[i] = bullet;
+            bullet.SetActive(false);
+        }
     }
-
-    public GameObject bulletFactory;
-
-    public GameObject firePosition;
 
     // Update is called once per frame
     void Update()

@@ -6,34 +6,15 @@ public class Managers : MonoBehaviour
 {
     // 최상위 관리자
     static Managers s_instance; // 유일성이 보장된다.
-    static Managers Instance
-    { 
-        get 
-        { 
-            Init();
-            return s_instance; 
-        } 
-    }  // 유일한 매니저를 갖고온다.
+    static Managers Instance { get { Init(); return s_instance;  }  }
 
-    // 입력 매니져
     InputManager _input = new InputManager();
-    public static InputManager Input
-    { 
-        get
-        {
-            return Instance._input;
-        }
-    }
-
-    // 리소스 매니져
     ResourceManager _resource = new ResourceManager();
-    public static ResourceManager Resource
-    {
-        get
-        {
-            return Instance._resource;
-        }
-    }
+    UIManager _ui = new UIManager();
+
+    public static InputManager Input { get { return Instance._input; } }
+    public static ResourceManager Resource { get { return Instance._resource; } }
+    public static UIManager UI { get { return Instance._ui; } }
 
     void Start()
     {

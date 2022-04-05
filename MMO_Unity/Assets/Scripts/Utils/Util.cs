@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Util
 { 
+    // 하위 자식을 찾습니다. UnityEngine.Object만 찾아주도록 합니다.
     public static T FindChild<T>(GameObject go, string name = null, bool recursive = false) where T : UnityEngine.Object
     {
         if( go == null)
@@ -42,5 +43,28 @@ public class Util
         }
 
         return null;
+    }
+
+    public static GameObject FindChild(GameObject go, string name = null, bool recursive = false)
+    {
+        Transform transform = FindChild<Transform>(go, name, recursive);
+        if( transform == null )
+        {
+            return null;
+        }
+
+        return transform.gameObject;
+    }
+
+    public static T GetOrAddComponent<T>(GameObject go) where T : UnityEngine.Component
+    {
+        T component = go.GetComponent<T>();
+
+        if (component == null)
+        {   // 없다면 붙여줍니다.
+            component = go.AddComponent<T>();
+        }
+
+        return component;
     }
 }
